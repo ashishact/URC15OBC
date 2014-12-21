@@ -1,9 +1,17 @@
 #include "ros/ros.h"
 #include "urc15/Arm.h"
 #include "urc15/Navigation.h"
+#include "urc15/Comm_DataArray.h"
 #include "std_msgs/String.h"
 
 #include <sstream>
+
+void communicationCallback(const urc15::Comm_DataArrayConstPtr& pkg)
+{
+  ROS_INFO("X bee value found [%d]", pkg->datas[0]);
+}
+
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "urc15_node");
@@ -12,6 +20,8 @@ int main(int argc, char **argv)
 
   ros::Publisher navigation_pub = n.advertise<std_msgs::String>("navigation_topic", 1000);
   ros::Publisher arm_pub = n.advertise<std_msgs::String>("arm_topic", 1000);
+
+  ros::Subscriber comm_sub = n.subscribe("comm_topic", 1000, communicationCallback);
 
   ros::ServiceClient navigation_client = n.serviceClient<urc15::Navigation>("navigation_server");
   ros::ServiceClient arm_client = n.serviceClient<urc15::Arm>("arm_server");
@@ -41,7 +51,7 @@ int main(int argc, char **argv)
   nav_srv.request.sendSatCount = 1;
   if (navigation_client.call(nav_srv))
   {
-    ROS_INFO("no of sattelite is: %d", nav_srv.response.satCount);
+    ROS_INFO("no of satellite is: %d", nav_srv.response.satCount);
   }
   else
   {

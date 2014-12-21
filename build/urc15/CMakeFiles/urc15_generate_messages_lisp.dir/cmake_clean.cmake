@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/urc15_generate_messages_lisp"
+  "/home/ashish/catkin_ws/devel/share/common-lisp/ros/urc15/msg/Comm_DataArray.lisp"
   "/home/ashish/catkin_ws/devel/share/common-lisp/ros/urc15/srv/Navigation.lisp"
   "/home/ashish/catkin_ws/devel/share/common-lisp/ros/urc15/srv/Arm.lisp"
 )

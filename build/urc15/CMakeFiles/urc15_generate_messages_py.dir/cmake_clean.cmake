@@ -1,7 +1,9 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/urc15_generate_messages_py"
+  "/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages/urc15/msg/_Comm_DataArray.py"
   "/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages/urc15/srv/_Navigation.py"
   "/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages/urc15/srv/_Arm.py"
+  "/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages/urc15/msg/__init__.py"
   "/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages/urc15/srv/__init__.py"
 )
 

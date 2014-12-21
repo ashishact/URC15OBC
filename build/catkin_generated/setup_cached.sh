@@ -5,8 +5,16 @@
 # it emulates the modifications of the setup script without recurring computations
 
 # new environment variables
+export CATKIN_TEST_RESULTS_DIR="/home/ashish/catkin_ws/build/test_results"
+export ROS_TEST_RESULTS_DIR="/home/ashish/catkin_ws/build/test_results"
 
 # modified environment variables
-export LD_LIBRARY_PATH="/home/ashish/catkin_ws/devel/lib/x86_64-linux-gnu:/opt/ros/indigo/lib/x86_64-linux-gnu:/home/ashish/catkin_ws/devel/lib:/opt/ros/indigo/lib"
-export PKG_CONFIG_PATH="/home/ashish/catkin_ws/devel/lib/x86_64-linux-gnu/pkgconfig:/opt/ros/indigo/lib/x86_64-linux-gnu/pkgconfig:/home/ashish/catkin_ws/devel/lib/pkgconfig:/opt/ros/indigo/lib/pkgconfig"
+export CMAKE_PREFIX_PATH="/home/ashish/catkin_ws/devel:$CMAKE_PREFIX_PATH"
+export CPATH="/home/ashish/catkin_ws/devel/include:$CPATH"
+export LD_LIBRARY_PATH="/home/ashish/catkin_ws/devel/lib:/home/ashish/catkin_ws/devel/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
+export PATH="/home/ashish/catkin_ws/devel/bin:$PATH"
+export PKG_CONFIG_PATH="/home/ashish/catkin_ws/devel/lib/pkgconfig:/home/ashish/catkin_ws/devel/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/ashish/catkin_ws/build"
+export PYTHONPATH="/home/ashish/catkin_ws/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/ashish/catkin_ws/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/ashish/catkin_ws/src:$ROS_PACKAGE_PATH"

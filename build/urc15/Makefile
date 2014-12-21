@@ -164,6 +164,20 @@ _urc15_generate_messages_check_deps_Arm/fast:
 .PHONY : _urc15_generate_messages_check_deps_Arm/fast
 
 # Convenience name for target.
+urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/rule:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/rule
+.PHONY : urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/rule
+
+# Convenience name for target.
+_urc15_generate_messages_check_deps_Comm_DataArray: urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/rule
+.PHONY : _urc15_generate_messages_check_deps_Comm_DataArray
+
+# fast build rule for target.
+_urc15_generate_messages_check_deps_Comm_DataArray/fast:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/build.make urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/build
+.PHONY : _urc15_generate_messages_check_deps_Comm_DataArray/fast
+
+# Convenience name for target.
 urc15/CMakeFiles/_urc15_generate_messages_check_deps_Navigation.dir/rule:
 	cd /home/ashish/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 urc15/CMakeFiles/_urc15_generate_messages_check_deps_Navigation.dir/rule
 .PHONY : urc15/CMakeFiles/_urc15_generate_messages_check_deps_Navigation.dir/rule
@@ -190,6 +204,20 @@ arm_node: urc15/CMakeFiles/arm_node.dir/rule
 arm_node/fast:
 	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/arm_node.dir/build.make urc15/CMakeFiles/arm_node.dir/build
 .PHONY : arm_node/fast
+
+# Convenience name for target.
+urc15/CMakeFiles/comm_node.dir/rule:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 urc15/CMakeFiles/comm_node.dir/rule
+.PHONY : urc15/CMakeFiles/comm_node.dir/rule
+
+# Convenience name for target.
+comm_node: urc15/CMakeFiles/comm_node.dir/rule
+.PHONY : comm_node
+
+# fast build rule for target.
+comm_node/fast:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/comm_node.dir/build.make urc15/CMakeFiles/comm_node.dir/build
+.PHONY : comm_node/fast
 
 # Convenience name for target.
 urc15/CMakeFiles/navigation_node.dir/rule:
@@ -355,6 +383,30 @@ src/arm_node.cpp.s:
 	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/arm_node.dir/build.make urc15/CMakeFiles/arm_node.dir/src/arm_node.cpp.s
 .PHONY : src/arm_node.cpp.s
 
+src/comm_node.o: src/comm_node.cpp.o
+.PHONY : src/comm_node.o
+
+# target to build an object file
+src/comm_node.cpp.o:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/comm_node.dir/build.make urc15/CMakeFiles/comm_node.dir/src/comm_node.cpp.o
+.PHONY : src/comm_node.cpp.o
+
+src/comm_node.i: src/comm_node.cpp.i
+.PHONY : src/comm_node.i
+
+# target to preprocess a source file
+src/comm_node.cpp.i:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/comm_node.dir/build.make urc15/CMakeFiles/comm_node.dir/src/comm_node.cpp.i
+.PHONY : src/comm_node.cpp.i
+
+src/comm_node.s: src/comm_node.cpp.s
+.PHONY : src/comm_node.s
+
+# target to generate assembly for a file
+src/comm_node.cpp.s:
+	cd /home/ashish/catkin_ws/build && $(MAKE) -f urc15/CMakeFiles/comm_node.dir/build.make urc15/CMakeFiles/comm_node.dir/src/comm_node.cpp.s
+.PHONY : src/comm_node.cpp.s
+
 src/navigation_node.o: src/navigation_node.cpp.o
 .PHONY : src/navigation_node.o
 
@@ -434,8 +486,10 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... _urc15_generate_messages_check_deps_Arm"
+	@echo "... _urc15_generate_messages_check_deps_Comm_DataArray"
 	@echo "... _urc15_generate_messages_check_deps_Navigation"
 	@echo "... arm_node"
+	@echo "... comm_node"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -456,6 +510,9 @@ help:
 	@echo "... src/arm_node.o"
 	@echo "... src/arm_node.i"
 	@echo "... src/arm_node.s"
+	@echo "... src/comm_node.o"
+	@echo "... src/comm_node.i"
+	@echo "... src/comm_node.s"
 	@echo "... src/navigation_node.o"
 	@echo "... src/navigation_node.i"
 	@echo "... src/navigation_node.s"

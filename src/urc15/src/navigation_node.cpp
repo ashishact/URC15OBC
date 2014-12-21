@@ -12,7 +12,7 @@ bool navigationServerEvaluate(urc15::Navigation::Request  &req,
          urc15::Navigation::Response &res)
 {
   if(req.sendSatCount){
-  	res.satCount = 6; // find no of sattelite 
+  	res.satCount = 6; // find no of satellite
   }
   
   return true;

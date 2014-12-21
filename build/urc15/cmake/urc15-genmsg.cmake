@@ -1,8 +1,8 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "urc15: 0 messages, 2 services")
+message(STATUS "urc15: 1 messages, 2 services")
 
-set(MSG_I_FLAGS "-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Iurc15:/home/ashish/catkin_ws/src/urc15/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -20,6 +20,11 @@ add_custom_target(_urc15_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "urc15" "/home/ashish/catkin_ws/src/urc15/srv/Navigation.srv" ""
 )
 
+get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg" NAME_WE)
+add_custom_target(_urc15_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "urc15" "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg" ""
+)
+
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Arm.srv" NAME_WE)
 add_custom_target(_urc15_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "urc15" "/home/ashish/catkin_ws/src/urc15/srv/Arm.srv" ""
@@ -31,6 +36,12 @@ add_custom_target(_urc15_generate_messages_check_deps_${_filename}
 
 ### Section generating for lang: gencpp
 ### Generating Messages
+_generate_msg_cpp(urc15
+  "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/urc15
+)
 
 ### Generating Services
 _generate_srv_cpp(urc15
@@ -60,6 +71,8 @@ add_dependencies(urc15_generate_messages urc15_generate_messages_cpp)
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Navigation.srv" NAME_WE)
 add_dependencies(urc15_generate_messages_cpp _urc15_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg" NAME_WE)
+add_dependencies(urc15_generate_messages_cpp _urc15_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Arm.srv" NAME_WE)
 add_dependencies(urc15_generate_messages_cpp _urc15_generate_messages_check_deps_${_filename})
 
@@ -72,6 +85,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS urc15_generate_messages_cpp)
 
 ### Section generating for lang: genlisp
 ### Generating Messages
+_generate_msg_lisp(urc15
+  "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/urc15
+)
 
 ### Generating Services
 _generate_srv_lisp(urc15
@@ -101,6 +120,8 @@ add_dependencies(urc15_generate_messages urc15_generate_messages_lisp)
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Navigation.srv" NAME_WE)
 add_dependencies(urc15_generate_messages_lisp _urc15_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg" NAME_WE)
+add_dependencies(urc15_generate_messages_lisp _urc15_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Arm.srv" NAME_WE)
 add_dependencies(urc15_generate_messages_lisp _urc15_generate_messages_check_deps_${_filename})
 
@@ -113,6 +134,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS urc15_generate_messages_lisp)
 
 ### Section generating for lang: genpy
 ### Generating Messages
+_generate_msg_py(urc15
+  "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/urc15
+)
 
 ### Generating Services
 _generate_srv_py(urc15
@@ -141,6 +168,8 @@ add_dependencies(urc15_generate_messages urc15_generate_messages_py)
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Navigation.srv" NAME_WE)
+add_dependencies(urc15_generate_messages_py _urc15_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/msg/Comm_DataArray.msg" NAME_WE)
 add_dependencies(urc15_generate_messages_py _urc15_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/ashish/catkin_ws/src/urc15/srv/Arm.srv" NAME_WE)
 add_dependencies(urc15_generate_messages_py _urc15_generate_messages_check_deps_${_filename})

@@ -5,7 +5,7 @@ void setup(){
 }
 
 void loop(){
-	ROS_INFO("Looping in TestNode");
+	ROS_INFO("Looping in TestNode"); 
 }
 
 void close(){

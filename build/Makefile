@@ -527,6 +527,19 @@ _urc15_generate_messages_check_deps_Arm/fast:
 .PHONY : _urc15_generate_messages_check_deps_Arm/fast
 
 #=============================================================================
+# Target rules for targets named _urc15_generate_messages_check_deps_Comm_DataArray
+
+# Build rule for target.
+_urc15_generate_messages_check_deps_Comm_DataArray: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _urc15_generate_messages_check_deps_Comm_DataArray
+.PHONY : _urc15_generate_messages_check_deps_Comm_DataArray
+
+# fast build rule for target.
+_urc15_generate_messages_check_deps_Comm_DataArray/fast:
+	$(MAKE) -f urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/build.make urc15/CMakeFiles/_urc15_generate_messages_check_deps_Comm_DataArray.dir/build
+.PHONY : _urc15_generate_messages_check_deps_Comm_DataArray/fast
+
+#=============================================================================
 # Target rules for targets named _urc15_generate_messages_check_deps_Navigation
 
 # Build rule for target.
@@ -551,6 +564,19 @@ arm_node: cmake_check_build_system
 arm_node/fast:
 	$(MAKE) -f urc15/CMakeFiles/arm_node.dir/build.make urc15/CMakeFiles/arm_node.dir/build
 .PHONY : arm_node/fast
+
+#=============================================================================
+# Target rules for targets named comm_node
+
+# Build rule for target.
+comm_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 comm_node
+.PHONY : comm_node
+
+# fast build rule for target.
+comm_node/fast:
+	$(MAKE) -f urc15/CMakeFiles/comm_node.dir/build.make urc15/CMakeFiles/comm_node.dir/build
+.PHONY : comm_node/fast
 
 #=============================================================================
 # Target rules for targets named navigation_node
@@ -724,8 +750,10 @@ help:
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... talker"
 	@echo "... _urc15_generate_messages_check_deps_Arm"
+	@echo "... _urc15_generate_messages_check_deps_Comm_DataArray"
 	@echo "... _urc15_generate_messages_check_deps_Navigation"
 	@echo "... arm_node"
+	@echo "... comm_node"
 	@echo "... navigation_node"
 	@echo "... test_node"
 	@echo "... urc15_gencpp"

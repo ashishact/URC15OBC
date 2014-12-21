@@ -45,11 +45,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+ add_message_files(
+   FILES
+   Comm_DataArray.msg
+ )
 
 ## Generate services in the 'srv' folder
  add_service_files(
@@ -109,6 +108,7 @@ include_directories(
 add_executable(urc15_node src/urc15_node.cpp)
 add_executable(navigation_node src/navigation_node.cpp)
 add_executable(arm_node src/arm_node.cpp)
+add_executable(comm_node src/comm_node.cpp)
 add_executable(test_node src/test_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
@@ -117,6 +117,7 @@ add_executable(test_node src/test_node.cpp)
 add_dependencies(urc15_node urc15_generate_messages_cpp)
 add_dependencies(navigation_node urc15_generate_messages_cpp)
 add_dependencies(arm_node urc15_generate_messages_cpp)
+add_dependencies(comm_node urc15_generate_messages_cpp)
 add_dependencies(test_node urc15_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
@@ -127,6 +128,9 @@ add_dependencies(test_node urc15_generate_messages_cpp)
    ${catkin_LIBRARIES}
  )
  target_link_libraries(arm_node
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(comm_node
    ${catkin_LIBRARIES}
  )
  target_link_libraries(test_node
