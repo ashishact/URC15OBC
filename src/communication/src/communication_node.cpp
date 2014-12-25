@@ -9,6 +9,8 @@
 #include <string>
 #include <iostream>
 #include <cstdio>
+#include <deque>
+//#include <boost/lockfree/queue.hpp>
 
 // OS Specific sleep
 #ifdef _WIN32
@@ -17,6 +19,8 @@
 #include <unistd.h>
 #endif
 
+#include "ros/ros.h"
+#include "communication/Comm_DataArray.h"
 #include "communication/serial.h"
 
 using std::string;
@@ -28,9 +32,35 @@ using std::vector;
 using std::cin;
 
 
+//boost::lockfree::queue<unsigned char>dataQueue;
+std::deque<unsigned char> rawDataQueue;	//stores raw data coming from the communication module
+serial::Serial my_serial;
+string port;
+unsigned long baud=9600;
+bool connected = false;
 
-#include "ros/ros.h"
-#include "communication/Comm_DataArray.h"
+ros::Publisher communication_pub;
+
+
+
+void sendData(){
+	std::vector<int>delimeter_pos;
+	for(int i =0; i < rawDataQueue.size(); i++){
+		if(rawDataQueue.at(i)==251){
+			delimeter_pos.push_back(i);
+		}
+	}
+	if(delimeter_pos.size()>=2){
+		communication::Comm_DataArray comdata;
+		for(int p = 0; p < delimeter_pos.size()-1; p++){
+			for(int idx = delimeter_pos.at(p)+1; idx < delimeter_pos.at(p+1); idx++){
+				comdata.datas.push_back(rawDataQueue.at(idx));
+			}
+			communication_pub.publish(comdata);
+		}
+		rawDataQueue.erase(rawDataQueue.begin(),rawDataQueue.begin()+delimeter_pos.back()-1);
+	}
+}
 string getPort(string hardwareID)
 {
 	vector<serial::PortInfo> devices_found = serial::list_ports();
@@ -57,11 +87,6 @@ string getPort(string hardwareID)
 	return "null";
 }
 
-
-serial::Serial my_serial;
-string port;
-unsigned long baud=9600;
-bool connected = false;
 
 bool connect(string hid){
 	port = getPort(hid);
@@ -99,7 +124,7 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  ros::Publisher communication_pub = n.advertise<communication::Comm_DataArray>("comm_topic", 1000);
+  communication_pub = n.advertise<communication::Comm_DataArray>("communication_topic", 1000);
   ros::Rate loop_rate(20);
   ROS_INFO("Communication node Started");
 
@@ -114,19 +139,13 @@ int main(int argc, char **argv)
 			  size_t avail = my_serial.available();
 			  if(avail){
 				string result = my_serial.read(avail);
+				for(int i=0; i < result.length();i++){
+//					rawDataQueue.push_back(result[i]);
+				}
+				sendData();	// send data to the urc15 node
 				ROS_INFO(result.c_str());
 			  }
 		  }
-
-
-	  	  static unsigned char v = 2;
-	  	  communication::Comm_DataArray comdata;
-	  	  comdata.datas.push_back((v%3)+1);
-	  	  comdata.datas.push_back(v+1);
-	  	  comdata.datas.push_back(v+2);
-	  	  comdata.datas.push_back(v+5);
-
-	  	  communication_pub.publish(comdata);
 
 	  	  ros::spinOnce();
 	  	  loop_rate.sleep();

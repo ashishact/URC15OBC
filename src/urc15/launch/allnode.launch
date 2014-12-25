@@ -3,5 +3,6 @@
   <node name="navigation_node"    pkg="urc15"  type="navigation_node" output="screen"   launch-prefix="gnome-terminal -e"/>
   <node name="arm_node"           pkg="urc15"  type="arm_node"        output="screen"   launch-prefix="gnome-terminal -e"/>
   <node name="comm_node"          pkg="urc15"  type="comm_node"       output="screen"   launch-prefix="gnome-terminal -e"/>
+  <node name="communication_node"          pkg="communication"  type="communication_node"       output="screen"   launch-prefix="gdb -ex run --args"/>
   <!--<node name="test_node"          pkg="urc15"  type="test_node"       output="screen"   launch-prefix="gnome-terminal -e"/>-->
 </launch>

@@ -39,7 +39,7 @@ int main(int argc, char **argv)
   navigation_pub = n.advertise<communication::Comm_DataArray>("navigation_topic", 1000);
   arm_pub = n.advertise<communication::Comm_DataArray>("arm_topic", 1000);
 
-  comm_sub = n.subscribe("comm_topic", 1000, onRecievedPkgCallback);
+  comm_sub = n.subscribe("communication_topic", 1000, onRecievedPkgCallback);
 
   navigation_client = n.serviceClient<urc15::Navigation>("navigation_server");
   arm_client = n.serviceClient<urc15::Arm>("arm_server");
