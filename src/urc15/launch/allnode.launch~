@@ -1,6 +1,0 @@
-<launch>
-  <node name="urc15_node"         pkg="urc15"  type="urc15_node"      output="screen"   launch-prefix="Terminal -e"/>
-  <node name="navigation_node"    pkg="urc15"  type="navigation_node" output="screen"   launch-prefix="Terminal -e"/>
-  <node name="arm_node"           pkg="urc15"  type="arm_node"        output="screen"   launch-prefix="Terminal -e"/>
-  <node name="test_node"          pkg="urc15"  type="test_node"       output="screen"   launch-prefix="Terminal -e"/>
-</launch>

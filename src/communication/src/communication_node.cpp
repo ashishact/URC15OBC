@@ -140,10 +140,11 @@ int main(int argc, char **argv)
 			  if(avail){
 				string result = my_serial.read(avail);
 				for(int i=0; i < result.length();i++){
-//					rawDataQueue.push_back(result[i]);
+					rawDataQueue.push_back(result[i]);
+//					cout<<result[i]<<" * ";
 				}
 				sendData();	// send data to the urc15 node
-				ROS_INFO(result.c_str());
+//				ROS_INFO(result.c_str());// it's giving segmentation fault
 			  }
 		  }
 
