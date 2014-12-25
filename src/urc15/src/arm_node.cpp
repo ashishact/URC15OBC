@@ -1,10 +1,10 @@
 #include "ros/ros.h"
 #include "urc15/Arm.h"
-#include "std_msgs/String.h"
+#include "communication/Comm_DataArray.h"
 
-void armCallback(const std_msgs::String::ConstPtr& msg)
+void armCallback(const communication::Comm_DataArrayConstPtr& pkg)
 {
-  ROS_INFO("Moving arm to [%s]", msg->data.c_str());
+  ROS_INFO("Arm Rec [%d] with ID:[%d]", pkg->datas[1], pkg->datas[0]);
 }
 
 bool armServerEvaluate(urc15::Arm::Request  &req,
@@ -27,6 +27,7 @@ int main(int argc, char **argv)
   ros::Subscriber arm_sub = n.subscribe("arm_topic", 1000, armCallback);
   ros::ServiceServer arm_service = n.advertiseService("arm_server", armServerEvaluate);
 
+  ROS_INFO("Arm node Started");
   ros::spin();
 
   return 0;

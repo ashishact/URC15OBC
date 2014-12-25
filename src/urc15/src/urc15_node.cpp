@@ -1,14 +1,32 @@
 #include "ros/ros.h"
 #include "urc15/Arm.h"
 #include "urc15/Navigation.h"
-#include "urc15/Comm_DataArray.h"
+#include "communication/Comm_DataArray.h"
 #include "std_msgs/String.h"
 
-#include <sstream>
 
-void communicationCallback(const urc15::Comm_DataArrayConstPtr& pkg)
+	ros::Publisher navigation_pub;
+	ros::Publisher arm_pub;
+	ros::Subscriber comm_sub;
+	ros::ServiceClient navigation_client;
+	ros::ServiceClient arm_client;
+
+
+void onRecievedPkgCallback(const communication::Comm_DataArrayConstPtr& pkg)
 {
   ROS_INFO("X bee value found [%d]", pkg->datas[0]);
+  unsigned char ID = pkg->datas[0];
+  switch(ID){
+
+  	  case 1:
+  		  navigation_pub.publish(pkg);
+  		  break;
+  	  case 2:
+  		  arm_pub.publish(pkg);
+  		  break;
+
+  }
+
 }
 
 
@@ -18,63 +36,41 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  ros::Publisher navigation_pub = n.advertise<std_msgs::String>("navigation_topic", 1000);
-  ros::Publisher arm_pub = n.advertise<std_msgs::String>("arm_topic", 1000);
+  navigation_pub = n.advertise<communication::Comm_DataArray>("navigation_topic", 1000);
+  arm_pub = n.advertise<communication::Comm_DataArray>("arm_topic", 1000);
 
-  ros::Subscriber comm_sub = n.subscribe("comm_topic", 1000, communicationCallback);
+  comm_sub = n.subscribe("comm_topic", 1000, onRecievedPkgCallback);
 
-  ros::ServiceClient navigation_client = n.serviceClient<urc15::Navigation>("navigation_server");
-  ros::ServiceClient arm_client = n.serviceClient<urc15::Arm>("arm_server");
+  navigation_client = n.serviceClient<urc15::Navigation>("navigation_server");
+  arm_client = n.serviceClient<urc15::Arm>("arm_server");
 
+  ROS_INFO("URC15 node Started");
   ros::Rate loop_rate(10);
-
-  int count = 0;
   while (ros::ok())
   {
-    std_msgs::String navigation_msg;
-    
-    std::stringstream ss;
-    ss << "Navigation message " << count;
-    navigation_msg.data = ss.str();
-
-    ROS_INFO("%s", navigation_msg.data.c_str());
-
-    std_msgs::String arm_msg;
-    arm_msg.data = "arm message";
-    ROS_INFO("Arm message publishing");
-
-    navigation_pub.publish(navigation_msg);
-    arm_pub.publish(arm_msg);
 
 
-  urc15::Navigation nav_srv;
-  nav_srv.request.sendSatCount = 1;
-  if (navigation_client.call(nav_srv))
-  {
-    ROS_INFO("no of satellite is: %d", nav_srv.response.satCount);
-  }
-  else
-  {
-    ROS_ERROR("Failed to call service nav_server");
-  }
-/*................................................*/
-  urc15::Arm arm_srv;
-  arm_srv.request.algorithm = 4;
-  if (arm_client.call(arm_srv))
-  {
-    ROS_INFO("current algorithm changed to: %d", arm_srv.response.successful);
-  }
-  else
-  {
-    ROS_ERROR("Failed to call service arm_server");
-  }
-
-
-
-
-
-
-
+//  urc15::Navigation nav_srv;
+//  nav_srv.request.sendSatCount = 1;
+//  if (navigation_client.call(nav_srv))
+//  {
+//    ROS_INFO("no of satellite is: %d", nav_srv.response.satCount);
+//  }
+//  else
+//  {
+//    ROS_ERROR("Failed to call service nav_server");
+//  }
+///*................................................*/
+//  urc15::Arm arm_srv;
+//  arm_srv.request.algorithm = 4;
+//  if (arm_client.call(arm_srv))
+//  {
+//    ROS_INFO("current algorithm changed to: %d", arm_srv.response.successful);
+//  }
+//  else
+//  {
+//    ROS_ERROR("Failed to call service arm_server");
+//  }
 
 
 
@@ -84,9 +80,7 @@ int main(int argc, char **argv)
 //********************************************************//
 
     ros::spinOnce();
-
     loop_rate.sleep();
-    ++count;
   }
   
   ROS_INFO("\nurc15_node ends\n");

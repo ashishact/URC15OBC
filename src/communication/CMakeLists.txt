@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(urc15)
+project(communication)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -45,17 +45,17 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- #add_message_files(
-  # FILES
-   #Comm_DataArray.msg
- #)
+ add_message_files(
+   FILES
+   Comm_DataArray.msg
+ )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-    Navigation.srv
-    Arm.srv
- )
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -67,7 +67,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
-   std_msgs
+   std_msgs  # Or other packages containing msgs
  )
 
 ###################################
@@ -81,7 +81,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-#  LIBRARIES lib
+#  LIBRARIES serial
   CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -97,47 +97,32 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
 )
-
 ## Declare a cpp library
-# add_library(urc15
-#   src/${PROJECT_NAME}/urc15.cpp
+# add_library(communication
+#   src/${PROJECT_NAME}/communication.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(urc15_node src/urc15_node.cpp)
-add_executable(urc15_node src/urc15_node.cpp)
-add_executable(navigation_node src/navigation_node.cpp)
-add_executable(arm_node src/arm_node.cpp)
-add_executable(comm_node src/comm_node.cpp)
-add_executable(test_node src/test_node.cpp)
-
+# add_executable(communication_node src/communication_node.cpp)
+add_executable(serial_example src/serial_example.cc)
+add_executable(communication_node src/communication_node.cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(urc15_node urc15_generate_messages_cpp)
-
-add_dependencies(urc15_node urc15_generate_messages_cpp)
-add_dependencies(navigation_node urc15_generate_messages_cpp)
-add_dependencies(arm_node urc15_generate_messages_cpp)
-add_dependencies(comm_node urc15_generate_messages_cpp)
-add_dependencies(test_node urc15_generate_messages_cpp)
+# add_dependencies(communication_node communication_generate_messages_cpp)
+add_dependencies(serial_example communication_generate_messages_cpp)
+add_dependencies(communication_node communication_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(urc15_node
-   ${catkin_LIBRARIES}
- )
- target_link_libraries(navigation_node
-   ${catkin_LIBRARIES}
- )
- target_link_libraries(arm_node
-   ${catkin_LIBRARIES}
- )
- target_link_libraries(comm_node
-   ${catkin_LIBRARIES}
- )
- target_link_libraries(test_node
-   ${catkin_LIBRARIES}
- )
+# target_link_libraries(communication_node
+#   ${catkin_LIBRARIES}
+# )
 
+ target_link_libraries(serial_example
+	${catkin_LIBRARIES} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libserial.a
+ )
+ target_link_libraries(communication_node
+	${catkin_LIBRARIES} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libserial.a
+ )
 
 #############
 ## Install ##
@@ -154,7 +139,7 @@ add_dependencies(test_node urc15_generate_messages_cpp)
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS urc15 urc15_node
+# install(TARGETS communication communication_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -179,7 +164,7 @@ add_dependencies(test_node urc15_generate_messages_cpp)
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_urc15.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_communication.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

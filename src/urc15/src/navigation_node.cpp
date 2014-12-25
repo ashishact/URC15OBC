@@ -1,11 +1,11 @@
 #include "ros/ros.h"
 #include "urc15/Navigation.h"
-#include "std_msgs/String.h"
+#include "communication/Comm_DataArray.h"
 
 
-void navigationCallback(const std_msgs::String::ConstPtr& msg)
+void navigationCallback(const communication::Comm_DataArrayConstPtr& pkg)
 {
-  ROS_INFO("Moving towards [%s]", msg->data.c_str());
+  ROS_INFO("Nav Rec [%d] with ID:[%d]", pkg->datas[1],pkg->datas[0]);
 }
 
 bool navigationServerEvaluate(urc15::Navigation::Request  &req,
@@ -28,6 +28,7 @@ int main(int argc, char **argv)
   ros::Subscriber navigation_sub = n.subscribe("navigation_topic", 1000, navigationCallback);
   ros::ServiceServer navigation_service = n.advertiseService("navigation_server", navigationServerEvaluate);
 
+  ROS_INFO("Nav node Started");
   ros::Rate loop_rate(10);
   while (ros::ok())
   {

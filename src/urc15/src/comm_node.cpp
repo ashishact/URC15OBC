@@ -1,6 +1,5 @@
 #include "ros/ros.h"
-#include "urc15/Comm_DataArray.h"
-
+#include "communication/Comm_DataArray.h"
 
 int main(int argc, char **argv)
 {
@@ -8,13 +7,13 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n; 
 
-  ros::Publisher comm_pub = n.advertise<urc15::Comm_DataArray>("comm_topic", 1000);
-  ros::Rate loop_rate(10);
-
+  ros::Publisher comm_pub = n.advertise<communication::Comm_DataArray>("comm_topic", 1000);
+  ros::Rate loop_rate(20);
+  ROS_INFO("Comm node Started");
   while (ros::ok())
   {
 	  static unsigned char v = 2;
-	  urc15::Comm_DataArray comdata;
+	  communication::Comm_DataArray comdata;
 	  comdata.datas.push_back((v%3)+1);
 	  comdata.datas.push_back(v+1);
 	  comdata.datas.push_back(v+2);
